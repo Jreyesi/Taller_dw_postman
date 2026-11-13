@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca | API de Libros</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="marca">
+      <span class="logo" aria-hidden="true">B</span>
+      <div>
+        <h1>Biblioteca</h1>
+        <p>API REST + PostgreSQL + JWT</p>
+      </div>
+    </div>
+    <div id="sesion" class="sesion" hidden>
+      <span id="usuario-activo" class="usuario-activo"></span>
+      <button id="btn-salir" class="btn btn-secundario" type="button">Cerrar sesion</button>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <section id="vista-login" class="vista-login" hidden>
+      <div class="tarjeta tarjeta-login">
+        <h2 id="titulo-acceso">Iniciar sesion</h2>
+        <p id="ayuda-acceso" class="ayuda">Usa tu cuenta de prueba o crea una cuenta nueva.</p>
+
+        <form id="form-login" novalidate>
+          <label class="campo">
+            <span>Usuario</span>
+            <input id="login-usuario" name="usuario" type="text" value="docente" autocomplete="username" required>
+          </label>
+
+          <label class="campo">
+            <span>Contrasena</span>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+          </label>
+
+          <button id="btn-login" class="btn btn-primario btn-bloque" type="submit">Entrar</button>
+          <p id="login-error" class="mensaje error" role="alert" hidden></p>
+        </form>
+
+        <div id="alternativa-registro">
+          <div class="separador"><span>o</span></div>
+          <button id="btn-mostrar-registro" class="btn btn-secundario btn-bloque" type="button">Crear usuario nuevo</button>
+        </div>
+
+        <form id="form-registro" novalidate hidden>
+          <label class="campo">
+            <span>Usuario</span>
+            <input id="registro-usuario" name="usuario" type="text" minlength="3" maxlength="50" pattern="[A-Za-z0-9._\-]{3,50}" autocomplete="username" placeholder="Ej. maria.lopez" required>
+          </label>
+
+          <label class="campo">
+            <span>Contrasena</span>
+            <input id="registro-password" name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Minimo 8 caracteres" required>
+          </label>
+
+          <label class="campo">
+            <span>Confirmar contrasena</span>
+            <input id="registro-confirmar" name="confirmar" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Repite la contrasena" required>
+          </label>
+
+          <button id="btn-registrar" class="btn btn-primario btn-bloque" type="submit">Crear usuario e ingresar</button>
+          <button id="btn-volver-login" class="btn btn-secundario btn-bloque" type="button">Volver a iniciar sesion</button>
+          <p id="registro-error" class="mensaje error" role="alert" hidden></p>
+        </form>
+
+        <p class="nota">El token se guarda solo durante la sesion de esta pestana.</p>
+      </div>
+    </section>
+
+    <section id="vista-app" hidden>
+      <div class="barra-superior">
+        <div>
+          <h2>Libros</h2>
+          <p id="contador" class="contador">0 libros</p>
+        </div>
+
+        <div class="herramientas">
+          <label class="buscador">
+            <span class="sr-only">Buscar libros</span>
+            <input id="filtro" type="search" placeholder="Buscar por titulo o autor">
+          </label>
+          <button id="btn-recargar" class="btn btn-secundario" type="button">Recargar</button>
+        </div>
+      </div>
+
+      <p id="mensaje" class="mensaje" role="status" hidden></p>
+
+      <div class="disposicion">
+        <section class="tarjeta tarjeta-formulario">
+          <h3 id="form-titulo">Nuevo libro</h3>
+          <p class="ayuda">Titulo y autor son obligatorios. El anio debe ser un entero valido.</p>
+
+          <form id="form-libro" novalidate>
+            <input id="libro-id" type="hidden">
+
+            <label class="campo">
+              <span>Titulo</span>
+              <input id="libro-titulo" name="titulo" type="text" maxlength="150" placeholder="Ej. Cien anos de soledad" required>
+            </label>
+
+            <label class="campo">
+              <span>Autor</span>
+              <input id="libro-autor" name="autor" type="text" maxlength="100" placeholder="Ej. Gabriel Garcia Marquez" required>
+            </label>
+
+            <label class="campo">
+              <span>Anio</span>
+              <input id="libro-anio" name="anio" type="number" min="1" step="1" placeholder="Ej. 1967" required>
+            </label>
+
+            <div class="acciones-formulario">
+              <button id="btn-guardar" class="btn btn-primario" type="submit">Crear libro</button>
+              <button id="btn-cancelar" class="btn btn-secundario" type="button" hidden>Cancelar</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="lista-libros" id="lista-libros" aria-live="polite" aria-busy="false"></section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Taller Semana 11 - Express, PostgreSQL y JWT</p>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

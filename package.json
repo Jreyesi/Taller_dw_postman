@@ -1,0 +1,25 @@
+{
+  "name": "taller-sem11-api-libros",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API REST de libros con Express, PostgreSQL y autenticacion JWT",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:init": "node scripts/init-db.js",
+    "db:check": "node scripts/check-db.js",
+    "test:smoke": "node scripts/smoke-test.js",
+    "token:expired": "node scripts/generar-token-expirado.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  }
+}

@@ -1,0 +1,139 @@
+﻿Running your collection...
+postman
+
+Taller Sem11 - API Libros JWT
+
+Folder 01 Autenticacion
+Sub-folder Login correcto
+
+  POST http://127.0.0.1:3000/auth/login [200 OK, 451 B, 805 ms]
+  Pass  Responde 200
+  Pass  Devuelve un JWT
+
+Sub-folder Login incorrecto
+
+  POST http://127.0.0.1:3000/auth/login [401 Unauthorized, 283 B, 420 ms]
+  Pass  Responde 401
+  Pass  No devuelve token
+
+Sub-folder Registrar usuario
+
+  POST http://127.0.0.1:3000/auth/register [201 Created, 299 B, 393 ms]
+  Pass  Responde 201
+  Pass  Devuelve el usuario normalizado
+  Pass  No devuelve el hash
+
+Folder 02 CRUD con JWT
+Sub-folder Crear libro
+
+  POST http://127.0.0.1:3000/libros [201 Created, 382 B, 20 ms]
+  Pass  Responde 201
+  Pass  Devuelve id
+
+Sub-folder Listar libros
+
+  GET http://127.0.0.1:3000/libros [200 OK, 379 B, 9 ms]
+  Pass  Responde 200
+  Pass  Devuelve un arreglo
+  Pass  Contiene el libro creado
+
+Sub-folder Obtener libro por id
+
+  GET http://127.0.0.1:3000/libros/18 [200 OK, 377 B, 12 ms]
+  Pass  Responde 200
+  Pass  Devuelve el libro solicitado
+
+Sub-folder Actualizar libro
+
+  PUT http://127.0.0.1:3000/libros/18 [200 OK, 396 B, 12 ms]
+  Pass  Responde 200
+  Pass  Titulo actualizado
+  Pass  Anio actualizado
+
+Sub-folder Eliminar libro
+
+  DELETE http://127.0.0.1:3000/libros/18 [200 OK, 449 B, 7 ms]
+  Pass  Responde 200
+  Pass  Confirma la eliminacion
+
+Sub-folder Verificar libro eliminado (404)
+
+  GET http://127.0.0.1:3000/libros/18 [404 Not Found, 286 B, 11 ms]
+  Pass  Responde 404
+
+Folder 03 Seguridad y validacion
+Sub-folder Crear sin token (401)
+
+  POST http://127.0.0.1:3000/libros [401 Unauthorized, 317 B, 9 ms]
+  Pass  Responde 401
+
+Sub-folder Listar sin token (401)
+
+  GET http://127.0.0.1:3000/libros [401 Unauthorized, 317 B, 6 ms]
+  Pass  Responde 401
+
+Sub-folder Crear con token invalido (401)
+
+  POST http://127.0.0.1:3000/libros [401 Unauthorized, 281 B, 8 ms]
+  Pass  Responde 401
+
+Sub-folder Listar con token invalido (401)
+
+  GET http://127.0.0.1:3000/libros [401 Unauthorized, 281 B, 6 ms]
+  Pass  Responde 401
+
+Sub-folder Obtener por id sin token (401)
+
+  GET http://127.0.0.1:3000/libros/999999 [401 Unauthorized, 317 B, 5 ms]
+  Pass  Responde 401
+
+Sub-folder Obtener por id con token invalido (401)
+
+  GET http://127.0.0.1:3000/libros/999999 [401 Unauthorized, 281 B, 9 ms]
+  Pass  Responde 401
+
+Sub-folder Actualizar sin token (401)
+
+  PUT http://127.0.0.1:3000/libros/999999 [401 Unauthorized, 317 B, 4 ms]
+  Pass  Responde 401
+
+Sub-folder Actualizar con token invalido (401)
+
+  PUT http://127.0.0.1:3000/libros/999999 [401 Unauthorized, 281 B, 5 ms]
+  Pass  Responde 401
+
+Sub-folder Eliminar sin token (401)
+
+  DELETE http://127.0.0.1:3000/libros/999999 [401 Unauthorized, 317 B, 3 ms]
+  Pass  Responde 401
+
+Sub-folder Eliminar con token invalido (401)
+
+  DELETE http://127.0.0.1:3000/libros/999999 [401 Unauthorized, 281 B, 23 ms]
+  Pass  Responde 401
+
+Sub-folder Crear sin campo obligatorio (400)
+
+  POST http://127.0.0.1:3000/libros [400 Bad Request, 354 B, 10 ms]
+  Pass  Responde 400
+  Pass  Explica el campo faltante
+
+-----------------------------------------------------------------------
+|                         |            executed |              failed |
+--------------------------+---------------------+----------------------
+|              iterations |                   1 |                   0 |
+--------------------------+---------------------+----------------------
+|                requests |                  20 |                   0 |
+--------------------------+---------------------+----------------------
+|            test-scripts |                  20 |                   0 |
+--------------------------+---------------------+----------------------
+|      prerequest-scripts |                   1 |                   0 |
+--------------------------+---------------------+----------------------
+|              assertions |                  32 |                   0 |
+-----------------------------------------------------------------------
+| total run duration: 3.8 s                                           |
+-----------------------------------------------------------------------
+| total data received: 2.21 KB (approx)                               |
+-----------------------------------------------------------------------
+| average response time: 88 ms [min: 3 ms, max: 805 ms, s.d.: 202 ms] |
+-----------------------------------------------------------------------

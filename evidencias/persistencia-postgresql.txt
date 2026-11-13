@@ -1,0 +1,86 @@
+﻿============================================================
+EVIDENCIA DE PERSISTENCIA - API LIBROS + POSTGRESQL + JWT
+Fecha: 2026-11-13 02:19:46
+Base de datos: taller_api en 127.0.0.1:5432
+============================================================
+
+[1] Iniciando servidor Node.js...
+Servidor disponible en http://127.0.0.1:3000
+
+[2] POST /auth/login con credenciales validas
+HTTP 200 | usuario: docente | tokenType: Bearer | expira: 1h
+Token JWT recibido (longitud: 168 caracteres). No se imprime el token.
+
+[3] POST /libros con JWT (creacion)
+HTTP 201 | Respuesta JSON:
+{
+    "id":  19,
+    "titulo":  "El principito",
+    "autor":  "Antoine de Saint-Exupery",
+    "anio":  1943,
+    "creado_en":  "2026-11-13T07:19:48.187Z",
+    "actualizado_en":  "2026-11-13T07:19:48.187Z"
+}
+
+[4] Consulta directa a PostgreSQL despues de crear:
+19|El principito|Antoine de Saint-Exupery|1943
+
+[5] PUT /libros/:id con JWT (actualizacion de titulo y anio)
+HTTP 200 | Respuesta JSON:
+{
+    "id":  19,
+    "titulo":  "El principito (edicion revisada)",
+    "autor":  "Antoine de Saint-Exupery",
+    "anio":  1945,
+    "creado_en":  "2026-11-13T07:19:48.187Z",
+    "actualizado_en":  "2026-11-13T07:19:48.432Z"
+}
+
+[6] Consulta directa a PostgreSQL despues de actualizar:
+19|El principito (edicion revisada)|Antoine de Saint-Exupery|1945|2026-11-13 02:19:48.432661-05
+
+[7] Reiniciando el servidor Node.js...
+Servidor reiniciado.
+
+[8] GET /libros/:id despues del reinicio, con el mismo JWT
+HTTP 200 | El registro sigue almacenado:
+{
+    "id":  19,
+    "titulo":  "El principito (edicion revisada)",
+    "autor":  "Antoine de Saint-Exupery",
+    "anio":  1945,
+    "creado_en":  "2026-11-13T07:19:48.187Z",
+    "actualizado_en":  "2026-11-13T07:19:48.432Z"
+}
+
+[9] Consulta directa a PostgreSQL despues del reinicio:
+19|El principito (edicion revisada)|Antoine de Saint-Exupery|1945
+
+[10] GET /libros/:id sin token (debe rechazarse sin tocar la base de datos)
+HTTP 401 | Peticion rechazada.
+
+[11] DELETE /libros/:id con JWT
+HTTP 200 | Respuesta JSON:
+{
+    "message":  "Libro eliminado correctamente.",
+    "libro":  {
+                  "id":  19,
+                  "titulo":  "El principito (edicion revisada)",
+                  "autor":  "Antoine de Saint-Exupery",
+                  "anio":  1945,
+                  "creado_en":  "2026-11-13T07:19:48.187Z",
+                  "actualizado_en":  "2026-11-13T07:19:48.432Z"
+              }
+}
+
+[12] Consulta directa a PostgreSQL despues de eliminar:
+0
+
+[13] GET /libros/:id despues de eliminar (debe responder 404)
+HTTP 404 | El registro ya no existe.
+
+============================================================
+FIN DE LA EVIDENCIA
+============================================================
+
+Servidor detenido.

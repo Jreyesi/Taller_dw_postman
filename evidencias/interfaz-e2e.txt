@@ -1,0 +1,39 @@
+Servidor de prueba: http://127.0.0.1:3100
+
+=== CARGA INICIAL ===
+PASS | La interfaz carga correctamente
+PASS | Se muestra el inicio de sesion
+PASS | La aplicacion esta oculta sin sesion
+
+=== FORMULARIO DE REGISTRO ===
+PASS | El boton Crear usuario nuevo abre el formulario
+PASS | El formulario de login se oculta durante el registro
+PASS | Se valida la confirmacion de contrasena
+PASS | Una validacion fallida no crea el usuario
+PASS | El usuario nuevo inicia sesion automaticamente
+PASS | El usuario nuevo existe directamente en PostgreSQL
+PASS | La contrasena se guarda como hash bcrypt
+PASS | La contrasena no se guarda en texto plano
+
+=== CRUD CON EL USUARIO NUEVO ===
+PASS | El libro creado aparece renderizado
+PASS | El libro existe en PostgreSQL
+PASS | El filtro encuentra el libro por autor
+PASS | El formulario se carga con los datos del libro
+PASS | El titulo actualizado existe en PostgreSQL
+PASS | El titulo anterior ya no existe en PostgreSQL
+PASS | El libro eliminado ya no existe en PostgreSQL
+
+=== CERRAR SESION Y REINGRESAR ===
+PASS | Cerrar sesion vuelve al login
+PASS | El token se elimina al cerrar sesion
+PASS | El usuario registrado puede volver a iniciar sesion
+
+=== USUARIO DUPLICADO ===
+PASS | La interfaz informa cuando el usuario ya existe
+PASS | El intento duplicado no crea otro usuario
+
+Errores de consola/pagina: 0
+PASS | No se registraron errores de JavaScript
+
+RESULTADO: interfaz y registro verificados sin fallos.
